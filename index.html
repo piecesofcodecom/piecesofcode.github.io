@@ -1,405 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesas Virtuais</title>
-    <style>
-        :root {
-            --primary-color: #4c72b0;
-            --secondary-color: #3e5f8a;
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            background-color: var(--light-bg);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-        
-        .profile-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid white;
-            margin-bottom: 20px;
-        }
-        
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            margin-top: 5px;
-            opacity: 0.9;
-        }
-        
-        .social-links {
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            color: white;
-            margin: 0 10px;
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-        
-        .social-links a:hover {
-            opacity: 0.8;
-        }
-        
-        .main-content {
-            padding: 60px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2rem;
-            color: var(--primary-color);
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .project-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .project-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        
-        .project-content {
-            padding: 20px;
-        }
-        
-        .project-title {
-            margin-top: 0;
-            color: var(--primary-color);
-        }
-        
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 15px 0;
-        }
-        
-        .tech-tag {
-            background-color: var(--light-bg);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-        }
-        
-        .project-links {
-            margin-top: 15px;
-        }
-        
-        .project-links a {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            margin-right: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        .project-links a:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        .about-section {
-            background-color: white;
-            padding: 60px 0;
-            margin-top: 40px;
-        }
-        
-        .about-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .skills-section {
-            margin-top: 40px;
-            text-align: center;
-        }
-        
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .skill-item {
-            background-color: var(--light-bg);
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-        
-        .contact-section {
-            padding: 60px 0;
-            text-align: center;
-        }
-        
-        .contact-methods {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        .contact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .contact-icon {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-        
-        @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            header {
-                padding: 40px 0;
-            }
-            
-            .profile-image {
-                width: 120px;
-                height: 120px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="profile-container">
-                <img src="images/logo.png" alt="Your Profile Picture" class="profile-image">
-                <h1>Mesas Virtuais</h1>
-                <p class="subtitle">Construindo mundos, Entregando Diversão</p>
-                <!--div class="social-links">
-                    <a href="index.html" target="_blank">Projects</a>
-                    <a href="https://linkedin.com/in/yourusername" target="_blank">People</a>
-                    <a href="https://twitter.com/yourusername" target="_blank">Contact</a>
-                </div-->
-            </div>
-        </div>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mesas Virtuais de RPG</title>
+    <meta
+      name="description"
+      content="Mesas abertas de RPG para jogadores se inscreverem em campanhas e one-shots."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" aria-label="Topo">
+      <a class="brand" href="#" aria-label="Mesas Virtuais de RPG">
+        <img src="images/LOGO_PNG.png" alt="" class="brand__logo">
+        <span class="brand__name">Mesas Virtuais</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Navegacao principal">
+        <a href="#mesas">Mesas abertas</a>
+        <!-- <a href="#contato">Contato</a> -->
+      </nav>
     </header>
 
-    <section class="main-content">
-        <div class="container">
-            <h2 class="section-title">Alguns Projetos</h2>
-            <div class="projects-grid">
-                <!-- Projeto 1 -->
-                <div class="project-card">
-                    <img src="images/punkapocalyptic.png" alt="Projeto 1" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title"><a href="https://foundryvtt.com/packages/punkapocalyptic">Punkapocalyptic RPG para FoundryVTT</a></h3>
-                        <p>O Punkapocalyptic RPG é um jogo de RPG de mesa inspirado no aclamado jogo de estratégia. Desenvolver este sistema foi uma experiência incrivelmente gratificante, especialmente por criar algo especial para a comunidade Punkapocalyptic e, em particular, para nossos apaixonados jogadores brasileiros. Este sistema foi patrocinado pela Tria Editora.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">FoundryVTT</span>
-                            <span class="tech-tag">Sistema</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="images/pcsHUDs.png" alt="Projeto 2" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title"><a href="https://foundryvtt.com/packages/mist-hud">Mist Engine HUD</a></h3>
-                        <p>Um HUD simples, sempre aberto e que nunca atrapalha, para os sistemas City of Mist e Otherscape. Ele permite que os jogadores selecionem rapidamente tags e status e realizem as rolagens de Movimentos, sem perguntas ou menus. Basta selecionar o que você precisa e rolar usando os Movimentos na Hotbar. Rápido e direto, como todo jogo cheio de ação deveria ser!</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">FoundryVTT</span>
-                            <span class="tech-tag">Módulo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="images/investigation_board.png" alt="Projeto 3" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title"><a href="https://foundryvtt.com/packages/investigation-board">Investigation Board</a></h3>
-                        <p>Indispensável para jogos investigativos como City of Mist, Call of Cthulhu e qualquer aventura cheia de conspirações. O módulo Investigation Board permite que todos à mesa colaborem de forma interativa, compartilhando pistas e descobertas diretamente na cena. É perfeito para conectar evidências e desvendar mistérios — seja resolvendo um caso criminal ou revelando segredos sobrenaturais.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">FoundryVTT</span>
-                            <span class="tech-tag">Módulo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="images/soundscape.gif" alt="Projeto 4" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title"><a href="https://foundryvtt.com/packages/soundscape-adventure">Soundscape Adventure</a></h3>
-                        <p>Soundscape Adventure é um módulo poderoso e intuitivo, projetado para enriquecer as sessões de RPG com experiências sonoras imersivas. Totalmente integrado ao FoundryVTT, ele permite que Mestres sincronizem facilmente sons ambientes e efeitos dinâmicos com o desenrolar da história. Transforme seus jogos de mesa virtuais em verdadeiras jornadas auditivas, dando vida às aventuras.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">FoundryVTT</span>
-                            <span class="tech-tag">Módulo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="images/Tactical_Map_Update.gif" alt="Projeto 5" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title"><a href="https://foundryvtt.com/packages/tactical-map">Tactical Map Switcher</a></h3>
-                        <p>O Foundry VTT permite inúmeros momentos memoráveis, desde batalhas táticas épicas até negociações intensas no Teatro da Mente. Para facilitar a vida dos Mestres, desenvolvemos um módulo que permite alternar facilmente entre cenas narrativas e mapas táticos dentro da cena ativa. Ele oferece transições suaves, melhorando significativamente a experiência de jogo — especialmente útil para quem prefere o Teatro da Mente, mas ainda deseja precisão tática durante os combates.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">FoundryVTT</span>
-                            <span class="tech-tag">Módulo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="images/dc20.png" alt="Projeto 6" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Token HUDs para DC20</h3>
-                        <p>Movidos pelo nosso amor por testar e apoiar novos sistemas de RPG, desenvolvemos dois Token HUDs (<a href="https://foundryvtt.com/packages/enhancedcombathud-dc20rpg">Argon</a> e <a href="https://foundryvtt.com/packages/token-action-hud-dc20rpg">Action</a>) especificamente para o novo sistema DC20.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">FoundryVTT</span>
-                            <span class="tech-tag">Módulo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="images/sleek-chat.gif" alt="Projeto 7" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title"><a href="https://foundryvtt.com/packages/sleek-chat">Sleek Chat</a></h3>
-                        <p>Sleek Chat é uma interface minimalista de chat, rolagens e mensagens para o Foundry VTT, que aumenta a imersão ao reduzir a poluição visual da interface. Maximize o espaço do seu tabletop virtual — é o companheiro ideal para jogos focados em narrativa e visualmente imersivos.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">FoundryVTT</span>
-                            <span class="tech-tag">Módulo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="images/household.png" alt="Projeto 8" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title"><a href="https://foundryvtt.com/packages/household">Household RPG para FoundryVTT</a></h3>
-                        <p>O Household RPG foi o primeiro sistema implementado pela PiecesOfCode — uma jornada maravilhosa de descoberta e aprendizado ao levar este belo jogo para o FoundryVTT. Criado por fãs para fãs, este sistema nasceu com o objetivo sincero de conectar amigos e permitir que continuem compartilhando experiências memoráveis de TTRPG, mesmo vivendo em países diferentes.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">FoundryVTT</span>
-                            <span class="tech-tag">Sistema</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__backdrop" aria-hidden="true"></div>
+        <div class="hero__content">
+          <img src="images/LOGO_PNG.png" alt="Logo Mesas Virtuais" class="hero__logo">
+          <p class="eyebrow">RPG online com mestre narrativo</p>
+          <h1 id="hero-title">Mesas abertas para novas aventuras</h1>
+          <p class="hero__text">
+            Campanhas e one-shots com foco em interpretacao, estrategia e escolhas
+            que realmente mudam o rumo da historia.
+          </p>
+          <a class="hero__action" href="#mesas">Ver mesas</a>
         </div>
-    </section>
+      </section>
 
-    <section class="about-section">
-        <div class="container">
-            <h2 class="section-title">Sobre Nós</h2>
-            <div class="about-content">
-                <p>Olá! Somos um grupo apaixonado por TTRPG, jogadores e Mestres, imersos neste hobby incrível desde os anos 90. Mas nosso entusiasmo não para na mesa de jogo — também somos profissionais experientes em tecnologia, com mais de uma década levando inovação a startups vibrantes e grandes empresas globais.</p>
-                <p>Ao unir nosso amor por aventuras de mesa com nossa ampla experiência em tecnologia, nos dedicamos a criar experiências imersivas e encantadoras, pensadas especialmente para Virtual Tabletops (VTTs). Seja você alguém em busca de módulos inovadores, sistemas de jogo envolventes ou ferramentas personalizadas para elevar suas noites de jogo, nosso compromisso é tornar suas sessões de VTT inesquecíveis.</p>
-                <p>Deixe-nos transformar seus sonhos de jogo em realidade — e levar felicidade diretamente para o seu tabletop virtual.</p>
-            </div>
+      <section class="open-tables" id="mesas" aria-labelledby="tables-title">
+        <div class="section-heading">
+          <p class="eyebrow">Inscricoes abertas</p>
+          <h2 id="tables-title">Escolha sua mesa</h2>
         </div>
-    </section>
 
-    <section class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Entre em Contato</h2>
-            <p>Estamos sempre abertos para conversar sobre novos projetos, ideias criativas ou oportunidades.</p>
-            <div class="contact-methods">
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <p><a href="mailto:contato@mesasvirtuais.com.br">contato@mesasvirtuais.com.br</a></p>
-                </div>
+        <div class="tables-grid">
+          <article class="table-card">
+            <div class="table-card__meta">
+              <span>CoC</span>
+              <span>One-Shot</span>
             </div>
-        </div>
-    </section>
+            <h3>O Museu Real</h3>
+            <p>
+              No final de 1896 o Museu Real recebeu um adicional de items para seu acervo Egípicio. Agora, o diretor Ladislau precisa organizar os itens e fazer o lançamento dessa nova exposição. Com o número reduzido de funcionários, Ladislau precisará da ajuda de pessoas externas ao museu. O que ninguém sabe é que esse não será um evento como outro qualquer.
+            </p>
+            <a class="table-card__link" href="https://docs.google.com/forms/d/e/1FAIpQLScdByDHd9HBiQrII-pK3Ihmhx9t5Yf7-oHdLjGFjCgNJszs4g/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer">
+              Inscrever-se
+            </a>
+          </article>
 
-    <footer>
-        <!-- <div class="container">
-            <p>&copy; 2025 Piece of Codes. Todos os direitos reservados.</p>
-        </div> -->
+          <!-- <article class="table-card">
+            <div class="table-card__meta">
+              <span>Tormenta20</span>
+              <span>One-shot</span>
+            </div>
+            <h3>O Cofre do Arcanista</h3>
+            <p>
+              Um roubo impossivel em uma torre viva, protegida por contratos magicos,
+              constructos antigos e rivais que chegaram primeiro.
+            </p>
+            <a class="table-card__link" href="https://example.com/inscricao-cofre-do-arcanista" target="_blank" rel="noopener noreferrer">
+              Inscrever-se
+            </a>
+          </article>
+
+          <article class="table-card">
+            <div class="table-card__meta">
+              <span>Call of Cthulhu</span>
+              <span>Investigacao</span>
+            </div>
+            <h3>Cartas de Blackwater</h3>
+            <p>
+              Investigadores seguem cartas sem remetente ate uma vila costeira onde
+              os moradores fingem nao ouvir o chamado vindo do farol.
+            </p>
+            <a class="table-card__link" href="https://example.com/inscricao-cartas-de-blackwater" target="_blank" rel="noopener noreferrer">
+              Inscrever-se
+            </a>
+          </article> -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contato">
+      <p>Mesas Virtuais</p>
+      <!-- <a href="https://example.com/contato" target="_blank" rel="noopener noreferrer">Contato externo</a> -->
     </footer>
-
-    <script>
-        // You can add custom JavaScript here if needed
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Portfolio site loaded!');
-        });
-    </script>
-</body>
+  </body>
 </html>
